@@ -14,7 +14,7 @@ public class Interactor : MonoBehaviour
             RaycastHit _hit;
 
 
-            if (Physics.Raycast(ray, out _hit, 1000))
+            if (Physics.Raycast(ray, out _hit, 3))
             {
 
                 InteractableObject interactable = _hit.transform.GetComponent<InteractableObject>();
