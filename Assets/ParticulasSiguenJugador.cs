@@ -2,36 +2,60 @@ using UnityEngine;
 
 public class ParticulasSiguenJugador : MonoBehaviour
 {
-    public ParticleSystem sistemaParticulas; // Asigna el sistema de partículas en el Inspector
-    public Transform jugador; // Asigna el jugador al que las partículas deben seguir
-    public float fuerzaCurva = 3f; // Cuánta curva tendrán las partículas
-    public float velocidadParticulas = 5f; // Velocidad a la que se moverán las partículas
+    public Transform player; // Referencia al jugador
+    public ParticleSystem particleSystem;
+    private ParticleSystem.Particle[] particles;
+    public float followSpeed = 2.0f; // Velocidad de seguimiento de las partículas
+    private bool isActive = false;
+    private float timer = 0f;
+    private float duration = 30f; // Duración en segundos
 
-    private ParticleSystem.Particle[] particulas;
+    private void Start()
+    {
+        particleSystem.Stop();
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (!isActive)
+            {
+                particleSystem.Play();
+                isActive = true;
+                timer = duration;
+            }
+        }
+
+        if (isActive)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0f)
+            {
+                particleSystem.Stop();
+                isActive = false;
+            }
+        }
+    }
 
     void LateUpdate()
     {
-        if (sistemaParticulas == null || jugador == null)
+        if (player == null || particleSystem == null || !isActive)
             return;
 
-        int numParticulas = sistemaParticulas.particleCount;
-        if (particulas == null || particulas.Length < numParticulas)
-            particulas = new ParticleSystem.Particle[numParticulas];
-
-        sistemaParticulas.GetParticles(particulas);
-
-        for (int i = 0; i < numParticulas; i++)
+        int particleCount = particleSystem.particleCount;
+        if (particles == null || particles.Length < particleCount)
         {
-            // Dirección recta hacia el jugador
-            Vector3 direccion = (jugador.position - particulas[i].position).normalized;
-
-            // Crear una desviación en la trayectoria con seno
-            Vector3 curva = Vector3.Cross(direccion, Vector3.up) * Mathf.Sin(Time.time * fuerzaCurva);
-
-            // Aplicar movimiento con curvatura
-            particulas[i].velocity = (direccion + curva) * velocidadParticulas;
+            particles = new ParticleSystem.Particle[particleCount];
         }
 
-        sistemaParticulas.SetParticles(particulas, numParticulas);
+        particleSystem.GetParticles(particles);
+
+        for (int i = 0; i < particleCount; i++)
+        {
+            // Movimiento suavizado de cada partícula hacia el jugador
+            particles[i].position = Vector3.Lerp(particles[i].position, player.position, Time.deltaTime * followSpeed);
+        }
+
+        particleSystem.SetParticles(particles, particleCount);
     }
 }

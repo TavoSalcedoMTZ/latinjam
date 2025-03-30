@@ -5,9 +5,14 @@ public class ControllerUi : MonoBehaviour
 {
     public TextMeshProUGUI textoDeInteraccion;
     public bool objetoInRaycast = false;
+    public GameObject Panel;
+    public TextMeshProUGUI[] textosObjetos;
+    int contador = 0;
+    int contadorFruta = 0;
     void Start()
     {
         objetoInRaycast = false;
+        Panel.SetActive(false);
     }
 
 
@@ -25,5 +30,39 @@ public class ControllerUi : MonoBehaviour
 
         }
 
+
+        ShowPanelInventory();
     }
+
+    public void ShowPanelInventory()
+    {
+        if (Input.GetKey(KeyCode.Tab))
+        {
+
+
+            Panel.SetActive(true);
+        }
+        else
+        {
+            Panel.SetActive(false);
+        }
+    }
+
+    public void ManagerObjetosInventory(string tag)
+    {
+        if (tag == "Cubo")
+        {
+            Debug.Log("Marcador");
+           contador += 1;
+            textosObjetos[0].text = "Cubo: " + contador;    
+
+        }
+        else if (tag=="Fruta")
+        {
+            contadorFruta += 1;
+            textosObjetos[1].text = "Fruta: " + contadorFruta;
+        }
+
+    }
+
 }
