@@ -1018,8 +1018,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rangoDeteccion: 200
-  cantidadRayos: 20
+  cantidadRayosActivo: 20
+  cantidadRayosPasivo: 10
   efectoDuracion: 30
+  intervaloEcolocalizacion: 0.3
 --- !u!1 &1073769407
 GameObject:
   m_ObjectHideFlags: 0
@@ -2021,7 +2023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1005995020}
   particleSystem: {fileID: 1529518127}
-  followSpeed: 2
+  followSpeed: 0.5
 --- !u!199 &1529518126
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -2071,7 +2073,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.1
+  m_MaxParticleSize: 1.68
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -2289,7 +2291,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
