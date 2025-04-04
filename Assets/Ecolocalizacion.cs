@@ -14,15 +14,14 @@ public class Ecolocalizacion : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && !efectoEnCurso)
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             Debug.Log("Ecolocalización activada");
             ActivarEcolocalizacion();
         }
 
         if ((Input.GetButton("Horizontal") || Input.GetButton("Vertical")) &&
-            Time.time >= tiempoUltimaEcolocalizacion + intervaloEcolocalizacion &&
-            !efectoEnCurso)
+            Time.time >= tiempoUltimaEcolocalizacion + intervaloEcolocalizacion)
         {
             EcolocalizacionPasiva();
             tiempoUltimaEcolocalizacion = Time.time;
