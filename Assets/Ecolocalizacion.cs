@@ -10,15 +10,19 @@ public class Ecolocalizacion : MonoBehaviour
     public float intervaloEcolocalizacion = 0.0000001f;
     private float tiempoUltimaEcolocalizacion = 0f;
 
+    private bool efectoEnCurso = false;
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && !efectoEnCurso)
         {
             Debug.Log("Ecolocalización activada");
             ActivarEcolocalizacion();
         }
 
-        if ((Input.GetButton("Horizontal") || Input.GetButton("Vertical")) && Time.time >= tiempoUltimaEcolocalizacion + intervaloEcolocalizacion)
+        if ((Input.GetButton("Horizontal") || Input.GetButton("Vertical")) &&
+            Time.time >= tiempoUltimaEcolocalizacion + intervaloEcolocalizacion &&
+            !efectoEnCurso)
         {
             EcolocalizacionPasiva();
             tiempoUltimaEcolocalizacion = Time.time;
@@ -66,6 +70,8 @@ public class Ecolocalizacion : MonoBehaviour
 
     void ProcesarImpacto(RaycastHit hit)
     {
+        if (efectoEnCurso) return; // Ignora si ya hay un efecto activo
+
         Debug.DrawLine(transform.position, hit.point, Color.red, 1f);
         Debug.Log($"Impacto en: {hit.collider.name} a {hit.point}");
 
@@ -90,6 +96,8 @@ public class Ecolocalizacion : MonoBehaviour
 
     IEnumerator AplicarEfectoGradual(Material outlineMaterial, Renderer renderer, Material originalMaterial, int materialIndex)
     {
+        efectoEnCurso = true; // Bloquear nuevas ejecuciones
+
         float mitadTiempo = efectoDuracion / 2f;
         float tiempo = 0;
 
@@ -117,5 +125,7 @@ public class Ecolocalizacion : MonoBehaviour
         Material[] materiales = renderer.materials;
         materiales[materialIndex] = originalMaterial;
         renderer.materials = materiales;
+
+        efectoEnCurso = false; // Permitir nuevos efectos
     }
 }
