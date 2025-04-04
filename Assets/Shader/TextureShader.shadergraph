@@ -314,7 +314,7 @@
         "color": {
             "r": 0.0,
             "g": 0.0,
-            "b": 1.0038042068481446,
+            "b": 0.20228791236877442,
             "a": 0.9490196108818054
         },
         "mode": 1
@@ -1048,7 +1048,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Saturation",
     "m_StageCapability": 3,
-    "m_Value": 0.1111111119389534,
+    "m_Value": 0.09000000357627869,
     "m_DefaultValue": 1.0,
     "m_Labels": []
 }

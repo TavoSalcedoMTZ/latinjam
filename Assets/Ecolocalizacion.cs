@@ -6,8 +6,8 @@ public class Ecolocalizacion : MonoBehaviour
     public float rangoDeteccion = 2000000f;
     public int cantidadRayosActivo = 20;
     public int cantidadRayosPasivo = 10;
-    public float efectoDuracion = 30f;
-    public float intervaloEcolocalizacion = 0.0000001f; 
+    public float efectoDuracion = 5f;
+    public float intervaloEcolocalizacion = 0.0000001f;
     private float tiempoUltimaEcolocalizacion = 0f;
 
     void Update()
@@ -21,7 +21,7 @@ public class Ecolocalizacion : MonoBehaviour
         if ((Input.GetButton("Horizontal") || Input.GetButton("Vertical")) && Time.time >= tiempoUltimaEcolocalizacion + intervaloEcolocalizacion)
         {
             EcolocalizacionPasiva();
-            tiempoUltimaEcolocalizacion = Time.time; 
+            tiempoUltimaEcolocalizacion = Time.time;
         }
     }
 
@@ -35,18 +35,7 @@ public class Ecolocalizacion : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, direccion, out hit, rangoDeteccion))
             {
-                Debug.DrawLine(transform.position, hit.point, Color.red, 1f);
-                Debug.Log($"Impacto en: {hit.collider.name} a {hit.point}");
-
-                Renderer renderer = hit.collider.GetComponent<MeshRenderer>();
-                if (renderer != null && renderer.materials.Length > 1)
-                {
-                    StartCoroutine(AplicarEfectoGradual(renderer.materials[1]));
-                }
-                else
-                {
-                    Debug.LogWarning($"El objeto {hit.collider.name} no tiene suficientes materiales.");
-                }
+                ProcesarImpacto(hit);
             }
             else
             {
@@ -57,7 +46,7 @@ public class Ecolocalizacion : MonoBehaviour
 
     void EcolocalizacionPasiva()
     {
-        Debug.Log("Ecolocalización pasiva activada"); 
+        Debug.Log("Ecolocalización pasiva activada");
         for (int i = 0; i < cantidadRayosPasivo; i++)
         {
             float angulo = (360f / cantidadRayosPasivo) * i;
@@ -66,18 +55,7 @@ public class Ecolocalizacion : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, direccion, out hit, 10f))
             {
-                Debug.DrawLine(transform.position, hit.point, Color.red, 1f);
-                Debug.Log($"Impacto en: {hit.collider.name} a {hit.point}");
-
-                Renderer renderer = hit.collider.GetComponent<MeshRenderer>();
-                if (renderer != null && renderer.materials.Length > 1)
-                {
-                    StartCoroutine(AplicarEfectoGradual(renderer.materials[1]));
-                }
-                else
-                {
-                    Debug.LogWarning($"El objeto {hit.collider.name} no tiene suficientes materiales.");
-                }
+                ProcesarImpacto(hit);
             }
             else
             {
@@ -86,7 +64,31 @@ public class Ecolocalizacion : MonoBehaviour
         }
     }
 
-    IEnumerator AplicarEfectoGradual(Material outlineMaterial)
+    void ProcesarImpacto(RaycastHit hit)
+    {
+        Debug.DrawLine(transform.position, hit.point, Color.red, 1f);
+        Debug.Log($"Impacto en: {hit.collider.name} a {hit.point}");
+
+        Renderer renderer = hit.collider.GetComponent<MeshRenderer>();
+        if (renderer != null && renderer.materials.Length > 1)
+        {
+            Material[] materiales = renderer.materials;
+            Material originalMaterial = materiales[1]; // Guardar material original
+            Material instancia = new Material(originalMaterial);
+            instancia.name = originalMaterial.name + "_Instance";
+
+            materiales[1] = instancia;
+            renderer.materials = materiales;
+
+            StartCoroutine(AplicarEfectoGradual(instancia, renderer, originalMaterial, 1));
+        }
+        else
+        {
+            Debug.LogWarning($"El objeto {hit.collider.name} no tiene suficientes materiales.");
+        }
+    }
+
+    IEnumerator AplicarEfectoGradual(Material outlineMaterial, Renderer renderer, Material originalMaterial, int materialIndex)
     {
         float mitadTiempo = efectoDuracion / 2f;
         float tiempo = 0;
@@ -94,8 +96,9 @@ public class Ecolocalizacion : MonoBehaviour
         while (tiempo < mitadTiempo)
         {
             float factor = tiempo / mitadTiempo;
+            float escala = Mathf.Lerp(1.0f, 1.0006f, factor);
             outlineMaterial.SetColor("_Color", Color.white * (1.0f + factor * 9.0f));
-            outlineMaterial.SetFloat("_Scale", 1.0f + factor * 0.02f);
+            outlineMaterial.SetFloat("_Scale", escala);
             tiempo += Time.deltaTime;
             yield return null;
         }
@@ -103,13 +106,16 @@ public class Ecolocalizacion : MonoBehaviour
         while (tiempo > 0)
         {
             float factor = tiempo / mitadTiempo;
+            float escala = Mathf.Lerp(1.0f, 1.0006f, factor);
             outlineMaterial.SetColor("_Color", Color.white * (1.0f + factor * 9.0f));
-            outlineMaterial.SetFloat("_Scale", 1.0f + factor * 0.02f);
+            outlineMaterial.SetFloat("_Scale", escala);
             tiempo -= Time.deltaTime;
             yield return null;
         }
 
-        outlineMaterial.SetColor("_Color", Color.white);
-        outlineMaterial.SetFloat("_Scale", 1.0f);
+        // Restaurar material original
+        Material[] materiales = renderer.materials;
+        materiales[materialIndex] = originalMaterial;
+        renderer.materials = materiales;
     }
 }
