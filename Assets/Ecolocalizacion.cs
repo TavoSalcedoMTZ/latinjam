@@ -95,7 +95,7 @@ public class Ecolocalizacion : MonoBehaviour
         {
             float factor = tiempo / mitadTiempo;
             outlineMaterial.SetColor("_Color", Color.white * (1.0f + factor * 9.0f));
-            outlineMaterial.SetFloat("_Scale", 1.0f + factor * 0.06f);
+            outlineMaterial.SetFloat("_Scale", 1.0f + factor * 0.02f);
             tiempo += Time.deltaTime;
             yield return null;
         }
@@ -104,7 +104,7 @@ public class Ecolocalizacion : MonoBehaviour
         {
             float factor = tiempo / mitadTiempo;
             outlineMaterial.SetColor("_Color", Color.white * (1.0f + factor * 9.0f));
-            outlineMaterial.SetFloat("_Scale", 1.0f + factor * 0.06f);
+            outlineMaterial.SetFloat("_Scale", 1.0f + factor * 0.02f);
             tiempo -= Time.deltaTime;
             yield return null;
         }
