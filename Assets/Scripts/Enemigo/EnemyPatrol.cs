@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyPatrol : MonoBehaviour
@@ -11,39 +11,22 @@ public class EnemyPatrol : MonoBehaviour
     private NavMeshAgent agent;
     private int currentPatrolIndex;
     private bool chasingPlayer = false;
+    private bool wasChasingPlayer = false;
+
+    // Collider para detectar al jugador en el área
+    private SphereCollider detectionCollider;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        detectionCollider = gameObject.AddComponent<SphereCollider>();
+        detectionCollider.radius = detectionRadius;  // Configura el radio del área de detección
+        detectionCollider.isTrigger = true;  // Hace que el collider sea un trigger
         GoToNextPatrolPoint();
     }
 
-    bool wasChasingPlayer = false;
-
     void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        if (distanceToPlayer < detectionRadius && CanSeePlayer())
-        {
-            if (!chasingPlayer)
-            {
-                chasingPlayer = true;
-                wasChasingPlayer = true;
-            }
-        }
-        else if (distanceToPlayer > detectionRadius * 1.5f && chasingPlayer)
-        {
-            chasingPlayer = false;
-
-            // Solo llamar una vez cuando deja de perseguir
-            if (wasChasingPlayer)
-            {
-                GoToNextPatrolPoint();
-                wasChasingPlayer = false;
-            }
-        }
-
         if (chasingPlayer)
         {
             agent.SetDestination(player.position);
@@ -62,13 +45,34 @@ public class EnemyPatrol : MonoBehaviour
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
     }
 
-    bool CanSeePlayer()
+    // Detecta al jugador cuando entra en el área de detección
+    void OnTriggerEnter(Collider other)
     {
-        Vector3 directionToPlayer = (player.position - transform.position).normalized;
-        if (Physics.Raycast(transform.position + Vector3.up, directionToPlayer, out RaycastHit hit, detectionRadius, ~0))
+        if ((playerLayer.value & (1 << other.gameObject.layer)) > 0) // Verifica si el objeto es el jugador
         {
-            return hit.transform.CompareTag("Player");
+            chasingPlayer = true;
+            wasChasingPlayer = true;
         }
-        return false;
+    }
+
+    // Deja de perseguir al jugador cuando sale del área
+    void OnTriggerExit(Collider other)
+    {
+        if ((playerLayer.value & (1 << other.gameObject.layer)) > 0) // Verifica si el objeto es el jugador
+        {
+            chasingPlayer = false;
+            if (wasChasingPlayer)
+            {
+                GoToNextPatrolPoint();
+                wasChasingPlayer = false;
+            }
+        }
+    }
+
+    // Dibuja el radio de detección en la escena
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }
