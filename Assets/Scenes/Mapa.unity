@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.5
@@ -1646,7 +1646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duracion: 5
   materialIndex: 1
-  escalaMaxima: 1.06
+  escalaMaxima: 1.006
 --- !u!1 &210261502
 GameObject:
   m_ObjectHideFlags: 0
@@ -2151,7 +2151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duracion: 5
   materialIndex: 1
-  escalaMaxima: 1.06
+  escalaMaxima: 1.01
 --- !u!1 &264338392 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3359483583446492503, guid: a831eedfa0b548444a3f9c7e2c2d592a, type: 3}
@@ -4557,7 +4557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duracion: 5
   materialIndex: 1
-  escalaMaxima: 1.06
+  escalaMaxima: 1.01
 --- !u!1 &556946844
 GameObject:
   m_ObjectHideFlags: 0
@@ -5341,7 +5341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duracion: 5
   materialIndex: 1
-  escalaMaxima: 1.06
+  escalaMaxima: 1.01
 --- !u!1 &662565250 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1e7c06d6edd50664893f00e1ae38e108, type: 3}
@@ -6024,7 +6024,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duracion: 5
   materialIndex: 1
-  escalaMaxima: 1.06
+  escalaMaxima: 1.001
 --- !u!64 &777540980
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6110,7 +6110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duracion: 5
   materialIndex: 1
-  escalaMaxima: 1.06
+  escalaMaxima: 1.01
 --- !u!1001 &792931175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7413,7 +7413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duracion: 5
   materialIndex: 1
-  escalaMaxima: 1.06
+  escalaMaxima: 1.01
 --- !u!1 &942872634 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 58f68cc6471fe5146b3d9144063b4c52, type: 3}
@@ -11709,7 +11709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duracion: 5
   materialIndex: 1
-  escalaMaxima: 1.06
+  escalaMaxima: 1.01
 --- !u!1 &1515927847 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3865750567423072172, guid: a831eedfa0b548444a3f9c7e2c2d592a, type: 3}
@@ -16055,7 +16055,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duracion: 5
   materialIndex: 1
-  escalaMaxima: 1.06
+  escalaMaxima: 1.006
 --- !u!1 &1781425002
 GameObject:
   m_ObjectHideFlags: 0
@@ -18717,7 +18717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duracion: 5
   materialIndex: 1
-  escalaMaxima: 1.06
+  escalaMaxima: 1.001
 --- !u!1 &2054223888 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fab84285a9968634e937a2a68992403e, type: 3}
