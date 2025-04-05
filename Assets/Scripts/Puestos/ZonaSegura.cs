@@ -1,16 +1,37 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class ZonaSegura : MonoBehaviour
 {
-    public Transform posicionEscondite; // Posición a la que se moverá la cámara
+    public Transform posicionEscondite;
     public float velocidadMovimiento = 2f;
+    public Transform camaraJugador;
 
     private bool moverCamara = false;
-    public Transform camaraJugador; // Asigna aquí la cámara del jugador
+    private bool escondido = false;
+
+    private Vector3 posicionOriginal;
+    private Quaternion rotacionOriginal;
+
+    private GestorDeVariables gestorDeVariables;
+
+    private void Start()
+    {
+        escondido = false;
+        gestorDeVariables = FindObjectOfType<GestorDeVariables>();
+    }
+
+    public void GuardarPosicionOriginal()
+    {
+        posicionOriginal = camaraJugador.position;
+        rotacionOriginal = camaraJugador.rotation;
+    }
 
     public void EsconderseActivar()
     {
+        GuardarPosicionOriginal(); 
+        gestorDeVariables.ActivarEsconderse();
         moverCamara = true;
+        escondido = true;
     }
 
     private void Update()
@@ -25,5 +46,30 @@ public class ZonaSegura : MonoBehaviour
                 moverCamara = false;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.E) && escondido)
+        {
+         
+            StartCoroutine(SalirEscondite());
+        }
+    }
+
+    private System.Collections.IEnumerator SalirEscondite()
+    {
+        float t = 0f;
+        Vector3 posicionInicio = camaraJugador.position;
+        Quaternion rotacionInicio = camaraJugador.rotation;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime * velocidadMovimiento;
+            camaraJugador.position = Vector3.Lerp(posicionInicio, posicionOriginal, t);
+            camaraJugador.rotation = Quaternion.Lerp(rotacionInicio, rotacionOriginal, t);
+            yield return null;
+        }
+
+        gestorDeVariables.DesactivarEsconderse();
+        moverCamara = false;
+        escondido = false;
     }
 }

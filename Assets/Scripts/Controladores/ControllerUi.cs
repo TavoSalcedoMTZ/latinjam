@@ -7,12 +7,14 @@ public class ControllerUi : MonoBehaviour
     public bool objetoInRaycast = false;
     public GameObject Panel;
     public TextMeshProUGUI[] textosObjetos;
+    public GestorDeVariables gestorDeVariables;
     int contador = 0;
     int contadorFruta = 0;
     void Start()
     {
         objetoInRaycast = false;
         Panel.SetActive(false);
+     
     }
 
 
@@ -24,14 +26,18 @@ public class ControllerUi : MonoBehaviour
         {
            textoDeInteraccion.text = "Presiona E ";
         }
-        else
+        else if (gestorDeVariables.stateZonaSegura)
         {
            textoDeInteraccion.text = "";
 
         }
+        else
+        {
+            textoDeInteraccion.text = "";
+        }
 
 
-        ShowPanelInventory();
+            ShowPanelInventory();
     }
 
     public void ShowPanelInventory()
