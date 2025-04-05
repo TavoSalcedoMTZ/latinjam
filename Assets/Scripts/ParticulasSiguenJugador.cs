@@ -3,7 +3,7 @@ using UnityEngine;
 public class ParticulasSiguenJugador : MonoBehaviour
 {
     public Transform player; // Referencia al jugador
-    public ParticleSystem particleSystem;
+    public new ParticleSystem particleSystem; 
     private ParticleSystem.Particle[] particles;
     public float followSpeed = 2.0f; // Velocidad de seguimiento de las partículas
     private bool isActive = false;
