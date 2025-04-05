@@ -11,7 +11,7 @@ public class EfectoEcolocalizacion : MonoBehaviour
     private Material original;
     private Material instancia;
     public int materialIndex = 1;
-    public float escalaMaxima = 1.06f;
+    public float escalaMaxima = 1.006f;
 
     void Start()
     {
