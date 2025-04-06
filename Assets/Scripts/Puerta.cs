@@ -22,13 +22,18 @@ public class Puerta : MonoBehaviour
         }
         else
         {
+            if (gestorDeVariables.llave2)
+            {
+                gestorDeVariables.LLaveIncorrecta();
+            }
+
             if (!intentoOpen1)
             {
                 intentoOpen1 = true;
                 if (!yaMostroMensajeSinLlave)
                 {
                     yaMostroMensajeSinLlave = true;
-                    Debug.Log("No tengo llave puerta2");
+                    Debug.Log("No tengo llave puerta1");
                     gestorDeVariables.NoTengoLlave();
                 }
                 else
@@ -52,6 +57,11 @@ public class Puerta : MonoBehaviour
         }
         else
         {
+            if (gestorDeVariables.llave1)
+            {
+                gestorDeVariables.LLaveIncorrecta();
+            }
+
             if (!intentoOpen2)
             {
                 intentoOpen2 = true;

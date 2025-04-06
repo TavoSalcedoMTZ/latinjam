@@ -21,7 +21,7 @@ public class Interactor : MonoBehaviour
         {
             objetoDetectado = _hit.transform.GetComponent<InteractableObject>();
 
-            if (objetoDetectado != null)
+            if (objetoDetectado != null && objetoDetectado.activar)
             {
                 controllerUi.objetoInRaycast = true;
             }

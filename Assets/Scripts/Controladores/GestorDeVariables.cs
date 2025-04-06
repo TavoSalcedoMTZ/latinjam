@@ -10,21 +10,30 @@ public class GestorDeVariables : MonoBehaviour
     public int numerodeTiendasEncontradas;
     public bool iniciojuego;
     public bool yaempezo;
-    public bool primerazonaSegura=false;
+    public bool primerazonaSegura = false;
     private ControllerUi controllerUi;
     public bool llave1;
     public bool llave2;
-    public int llaves= 0;
-    public int llavesencontradas=0;
+    public int llaves = 0;
+    public int llavesencontradas = 0;
     public Cambiarnivel cambiarnivel;
 
-    public bool frutascompletas=false;
+    public bool frutascompletas = false;
     public bool copascompletas = false;
     public bool crucifijoscompletos = false;
     public bool hiloscompletos = false;
     public bool velascompletas = false;
+    public bool altaractivo = false;
+    bool yapasowin=false;
 
+    public bool PlayerMuerto = false;
+    public bool eventopasado=false;
 
+    public GameObject screemer;
+    public GameObject ApagarCanvas;
+    public GameObject[] enemigos;
+
+    public bool ObjetosCompletos = false;
     private void Update()
     {
 
@@ -38,19 +47,51 @@ public class GestorDeVariables : MonoBehaviour
             PrimeraTiendaEncontrada();
         }
 
-        WinCondition();
+        if (!yapasowin)
+        {
+            WinCondition();
+        }
+
+        if (PlayerMuerto)
+        {
+            stateZonaSegura = true;
+            screemer.SetActive(true);
+            ApagarCanvas.SetActive(false);
+            enemigos[0].SetActive(false);
+            enemigos[1].SetActive(false);
+            enemigos[2].SetActive(false);
+
+            cambiarnivel.ActivarMuerte();
 
 
+        }
+
+        if (ObjetosCompletos&&!eventopasado)
+        {
+            controllerUi.AgregarEventoALaCola(controllerUi.GestorDialogos(11));
+            eventopasado = true;
+        }
+
+       
     }
     public void WinCondition()
     {
         if (frutascompletas && copascompletas && crucifijoscompletos && hiloscompletos && velascompletas)
         {
-            cambiarnivel.CambiarEscena("victoria");
+            ObjetosCompletos = true;
+            Debug.Log("Has completado el altar");
+
+            altaractivo = true;
+            yapasowin = true;
+
 
         }
     }
 
+
+    public void LLaveIncorrecta(){
+     controllerUi.AgregarEventoALaCola(controllerUi.GestorDialogos(7));
+    }
     public void NoTengoLlave()
     {
         controllerUi.AgregarEventoALaCola(controllerUi.GestorDialogos(5));
@@ -96,6 +137,7 @@ public class GestorDeVariables : MonoBehaviour
         playermodel.SetActive(true);
         stateZonaSegura = false;
         rotationCamara.DesactivarCursor();
+        rotationCamara.DesactivarCursor();
 
     }
 
@@ -138,12 +180,15 @@ public class GestorDeVariables : MonoBehaviour
         {
             case 1:
                 llave1 = true;
+
                 llavesencontradas++;
+                controllerUi.AgregarEventoALaCola(controllerUi.GestorDialogos(8));
                 break;
 
             case 2:
                 llave2 = true;
                 llavesencontradas++;
+                controllerUi.AgregarEventoALaCola(controllerUi.GestorDialogos(8));
                 break;
         }
 

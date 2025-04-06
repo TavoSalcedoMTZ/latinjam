@@ -560,6 +560,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa3809fa245f504dac52a4fc259f3da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelMuerte: {fileID: 0}
+  panelGanar: {fileID: 0}
+  fadeDuration: 2
 --- !u!4 &816822194
 Transform:
   m_ObjectHideFlags: 0
@@ -856,6 +859,7 @@ GameObject:
   - component: {fileID: 1225319885}
   - component: {fileID: 1225319884}
   - component: {fileID: 1225319883}
+  - component: {fileID: 1225319887}
   m_Layer: 5
   m_Name: Victoria
   m_TagString: Untagged
@@ -949,6 +953,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1225319887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225319882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18ab94c533a1ccc47967d0a397311b05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1258810725
 GameObject:
   m_ObjectHideFlags: 0

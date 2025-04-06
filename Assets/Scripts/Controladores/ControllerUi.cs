@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Mono.Cecil.Cil;
 
 public class ControllerUi : MonoBehaviour
 {
@@ -22,12 +23,13 @@ public class ControllerUi : MonoBehaviour
     bool inventarioabiertoporprimeraVez = false;
     bool BorrarTextoUso = false;
     bool textoMostrandose = false;
-    bool canOpenInventory = false;
-
-    private Queue<IEnumerator> colaDeEventos = new Queue<IEnumerator>(); // 🔁 COLA DE EVENTOS
+    bool canOpenInventory = false;    private Queue<IEnumerator> colaDeEventos = new Queue<IEnumerator>(); // 🔁 COLA DE EVENTOS
     private bool procesandoCola = false;
+    //bool dialogoFinalMostrado = false; // Para evitar que el dialogo se muestre varias veces
+    public bool dialogoOlfatear=false;
+    public bool dialogoOlfatearMostrado = false; // Para evitar que el dialogo se muestre varias veces
 
-   
+
     void Start()
     {
         inventarioabiertoporprimeraVez = false;
@@ -51,6 +53,24 @@ public class ControllerUi : MonoBehaviour
 
         ShowPanelInventory();
         ManejoContadoresObjetos();
+
+
+        if (Input.GetKey(KeyCode.F)&& !dialogoOlfatear && dialogoOlfatearMostrado){
+
+            AgregarEventoALaCola(BorrarTexto(textoMision[3], null, 0.05f, 1f));
+            dialogoOlfatear = true;
+
+
+        }
+        /*
+        if (gestorDeVariables.altaractivo && !dialogoFinalMostrado)
+        {
+            AgregarEventoALaCola(GestorDialogos(11));
+            dialogoFinalMostrado = true;
+            Debug.Log("Marcador 1");
+        }
+        */
+
     }
 
     public void ShowPanelInventory()
@@ -71,13 +91,17 @@ public class ControllerUi : MonoBehaviour
             Panel.SetActive(false);
         }
     }
+    public void ShowTextoFrutas()
+    {
+        AgregarEventoALaCola(GestorDialogos(12));
+    }
 
     public void ManagerObjetosInventory(string tag)
     {
         if (tag == "Copa")
         {
             contador += 1;
-            textosObjetos[0].text = "Copa: " + contador + "/3";
+            textosObjetos[0].text = contador + "/3";
             if (contador == 3)
             {
                 gestorDeVariables.copascompletas = true;
@@ -86,7 +110,7 @@ public class ControllerUi : MonoBehaviour
         else if (tag == "Fruta")
         {
             contadorFruta += 1;
-            textosObjetos[1].text = "Fruta: " + contadorFruta + "/8";
+            textosObjetos[1].text = contadorFruta + "/8";
 
             if (contadorFruta == 8)
             {
@@ -96,7 +120,7 @@ public class ControllerUi : MonoBehaviour
         else if (tag == "Crucifico")
         {
             contadorcrucifijos += 1;
-            textosObjetos[2].text = "Crucifico: " + contadorcrucifijos + "/3";
+            textosObjetos[2].text =contadorcrucifijos + "/3";
             if (contadorcrucifijos == 3)
             {
                 gestorDeVariables.crucifijoscompletos = true;
@@ -105,7 +129,7 @@ public class ControllerUi : MonoBehaviour
         else if (tag == "hilo")
         {
             contadorhilo += 1;
-            textosObjetos[3].text = "hilo: " + contadorhilo + "/3";
+            textosObjetos[3].text =contadorhilo + "/3";
 
             if (contadorhilo == 3)
             {
@@ -115,7 +139,7 @@ public class ControllerUi : MonoBehaviour
         else if (tag == "vela")
         {
             contadorvela += 1;
-            textosObjetos[4].text = "vela: " + contadorvela + "/4";
+            textosObjetos[4].text = contadorvela + "/4";
 
             if (contadorvela == 4)
             {
@@ -163,6 +187,19 @@ public class ControllerUi : MonoBehaviour
     {
         mensajeMision = "Encuentra la llave de la puerta";
         AgregarEventoALaCola(EscribirTexto(mensajeMision, 0.05f, textoMision[1], 1));
+    }
+    public void EventoMision3()
+    {
+        Debug.Log("Marcador 3");
+        mensajeMision = "Ve al altar";
+        AgregarEventoALaCola(EscribirTexto(mensajeMision, 0.05f, textoMision[2], 9090));
+    }
+
+    public void EventoMision4()
+    {
+        mensajeMision = "Presiona F para olfatear la fruta podrida";
+        dialogoOlfatearMostrado = true;
+        AgregarEventoALaCola(EscribirTexto(mensajeMision, 0.05f, textoMision[3], 9090));
     }
 
     public  IEnumerator GestorDialogos(int dialogoIndex)
@@ -234,7 +271,40 @@ public class ControllerUi : MonoBehaviour
                 AgregarEventoALaCola(EscribirTexto("Sigue Cerrado", 0.05f, dialgosTexto, 9090));
                 AgregarEventoALaCola(BorrarTexto(dialgosTexto, null, 0.01f, 1f));
                 break;
+
+            case 7:
+                AgregarEventoALaCola(EscribirTexto("La llave no encaja", 0.05f, dialgosTexto, 9090));
+                AgregarEventoALaCola(BorrarTexto(dialgosTexto, null, 0.01f, 1f));
+                break;
+
+            case 8:
+                AgregarEventoALaCola(EscribirTexto("Encontre una llave", 0.05f, dialgosTexto, 9090));
+                AgregarEventoALaCola(BorrarTexto(dialgosTexto, null, 0.01f, 1f));
+                break;
+
+            case 9:
+                AgregarEventoALaCola(EscribirTexto("Encontre un ingrediente", 0.05f, dialgosTexto, 9090));
+                AgregarEventoALaCola(BorrarTexto(dialgosTexto, null, 0.01f, 1f));
+                break;
+
+            case 11:
+                AgregarEventoALaCola(EscribirTexto("Ya tengo todo, ahora tengo que ir al altar", 0.05f, dialgosTexto, 9090));
+                AgregarEventoALaCola(BorrarTexto(dialgosTexto, null, 0.01f, 1f));
+                EventoMision3();
+                Debug.Log("Marcador 2");
+
+              
+                break;
+         
+            case 12:
+                AgregarEventoALaCola(EscribirTexto("Creo que puedo oler la fruta podrida", 0.05f, dialgosTexto, 9090));
+                AgregarEventoALaCola(BorrarTexto(dialgosTexto, null, 0.01f, 1f));
+                EventoMision4();
+
+                break;
         }
+
+
     }
 
     IEnumerator EscribirTexto(string mensaje, float velocidad, TextMeshProUGUI textmesh, int index)

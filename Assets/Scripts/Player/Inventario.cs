@@ -3,6 +3,7 @@ using UnityEngine;
 public class Inventario : MonoBehaviour
 {
     public ControllerUi controllerUi;
+    GestorDeVariables gestorDeVariables;
 
     public void AddItem(GameObject gameob)
     {
@@ -12,6 +13,7 @@ public class Inventario : MonoBehaviour
 
 
         controllerUi.ManagerObjetosInventory(etiqueta);
+        controllerUi.AgregarEventoALaCola(controllerUi.GestorDialogos(9));
 
         Destroy(gameob);
     }

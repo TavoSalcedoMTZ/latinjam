@@ -4,12 +4,13 @@ using UnityEngine.Events;
 public class InteractableObject : MonoBehaviour
 {
     public UnityEvent OnInteract;
+   public bool activar=true;
 
     public void Interact()
     {
         Debug.Log("Interact called on " + gameObject.name);
 
-        if (OnInteract != null)
+        if (OnInteract != null && activar)
         {
             Debug.Log("OnInteract is set, invoking...");
             OnInteract.Invoke();
