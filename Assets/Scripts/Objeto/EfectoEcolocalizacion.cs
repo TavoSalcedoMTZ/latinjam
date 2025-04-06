@@ -12,6 +12,7 @@ public class EfectoEcolocalizacion : MonoBehaviour
     private Material instancia;
     public int materialIndex = 1;
     public float escalaMaxima = 1.006f;
+    public Color colorOutline=Color.white;
 
     void Start()
     {
@@ -49,7 +50,7 @@ public class EfectoEcolocalizacion : MonoBehaviour
         {
             float factor = tiempo / mitadTiempo;
             float escala = Mathf.Lerp(1.0f, escalaMaxima, factor);
-            instancia.SetColor("_Color", Color.white * (1.0f + factor * 9.0f));
+            instancia.SetColor("_Color",colorOutline * (1.0f + factor * 9.0f));
             instancia.SetFloat("_Scale", escala);
 
             tiempo += Time.deltaTime;
@@ -61,7 +62,7 @@ public class EfectoEcolocalizacion : MonoBehaviour
         {
             float factor = tiempo / mitadTiempo;
             float escala = Mathf.Lerp(1.0f, escalaMaxima, factor);
-            instancia.SetColor("_Color", Color.white * (1.0f + factor * 9.0f));
+            instancia.SetColor("_Color", colorOutline * (1.0f + factor * 9.0f));
             instancia.SetFloat("_Scale", escala);
 
             tiempo -= Time.deltaTime;
@@ -69,7 +70,7 @@ public class EfectoEcolocalizacion : MonoBehaviour
         }
 
         // Restaurar estado visual
-        instancia.SetColor("_Color", Color.white);
+        instancia.SetColor("_Color", colorOutline);
         instancia.SetFloat("_Scale", 1.0f);
 
         efectoActivo = false;
