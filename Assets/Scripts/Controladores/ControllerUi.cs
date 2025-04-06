@@ -12,6 +12,9 @@ public class ControllerUi : MonoBehaviour
     public GestorDeVariables gestorDeVariables;
     int contador = 0;
     int contadorFruta = 0;
+    int contadorcrucifijos=0;
+    int contadorhilo = 0;
+    int contadorvela = 0;
     public TextMeshProUGUI[] textoMision;
     public GameObject[] contadoresMisiones;
     public string mensajeMision;
@@ -71,15 +74,30 @@ public class ControllerUi : MonoBehaviour
 
     public void ManagerObjetosInventory(string tag)
     {
-        if (tag == "Cubo")
+        if (tag == "Copa")
         {
             contador += 1;
-            textosObjetos[0].text = "Cubo: " + contador;
+            textosObjetos[0].text = "Copa: " + contador;
         }
         else if (tag == "Fruta")
         {
             contadorFruta += 1;
             textosObjetos[1].text = "Fruta: " + contadorFruta;
+        }
+        else if (tag == "Crucifico")
+        {
+            contadorcrucifijos += 1;
+            textosObjetos[2].text = "Crucifico" + contadorcrucifijos;
+        }
+        else if (tag == "hilo")
+        {
+            contadorhilo += 1;
+            textosObjetos[3].text = "hilo" + contadorhilo;
+        }
+        else if (tag == "vela")
+        {
+            contadorvela += 1;
+            textosObjetos[4].text = "vela" + contadorvela;
         }
     }
 

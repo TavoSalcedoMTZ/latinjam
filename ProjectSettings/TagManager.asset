@@ -8,6 +8,10 @@ TagManager:
   - Cubo
   - Fruta
   - objeto
+  - Crucifico
+  - Copa
+  - hilo
+  - vela
   layers:
   - Default
   - TransparentFX
