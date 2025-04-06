@@ -77,51 +77,74 @@ public class ControllerUi : MonoBehaviour
         if (tag == "Copa")
         {
             contador += 1;
-            textosObjetos[0].text = "Copa: " + contador;
+            textosObjetos[0].text = "Copa: " + contador + "/3";
+            if (contador == 3)
+            {
+                gestorDeVariables.copascompletas = true;
+            }
         }
         else if (tag == "Fruta")
         {
             contadorFruta += 1;
-            textosObjetos[1].text = "Fruta: " + contadorFruta;
-        }
-        else if (tag == "Crucifico")
-        {
-            contadorcrucifijos += 1;
-            textosObjetos[2].text = "Crucifico" + contadorcrucifijos;
-        }
-        else if (tag == "hilo")
-        {
-            contadorhilo += 1;
-            textosObjetos[3].text = "hilo" + contadorhilo;
-        }
-        else if (tag == "vela")
-        {
-            contadorvela += 1;
-            textosObjetos[4].text = "vela" + contadorvela;
+            textosObjetos[1].text = "Fruta: " + contadorFruta + "/8";
+
+            if (contadorFruta == 8)
+            {
+                gestorDeVariables.frutascompletas = true;
+            }
+            else if (tag == "Crucifico")
+            {
+                contadorcrucifijos += 1;
+                textosObjetos[2].text = "Crucifico" + contadorcrucifijos + "/3";
+                if (contadorcrucifijos == 3)
+                {
+                    gestorDeVariables.crucifijoscompletos = true;
+                }
+            }
+            else if (tag == "hilo")
+            {
+                contadorhilo += 1;
+                textosObjetos[3].text = "hilo" + contadorhilo + "/3";
+
+                if (contadorhilo == 3)
+                {
+                    gestorDeVariables.hiloscompletos = true;
+                }
+            }
+            else if (tag == "vela")
+            {
+                contadorvela += 1;
+                textosObjetos[4].text = "vela" + contadorvela + "/3";
+
+                if (contadorvela == 3)
+                {
+                    gestorDeVariables.velascompletas = true;
+                }
+            }
         }
     }
+        void ManejoContadoresObjetos()
+        {
+            if (gestorDeVariables.numerodeTiendasEncontradas != 5)
+            {
+                contadoresMisiones[0].GetComponent<TextMeshProUGUI>().text = "[" + gestorDeVariables.numerodeTiendasEncontradas + "/5]";
+            }
+            else
+            {
+                AgregarEventoALaCola(GestorDialogos(4));
+                AgregarEventoALaCola(BorrarTexto(contadoresMisiones[0].GetComponent<TextMeshProUGUI>(), textoMision[0], 0.05f, 0));
+            }
 
-    void ManejoContadoresObjetos()
-    {
-        if (gestorDeVariables.numerodeTiendasEncontradas != 5)
-        {
-            contadoresMisiones[0].GetComponent<TextMeshProUGUI>().text = "[" + gestorDeVariables.numerodeTiendasEncontradas + "/5]";
+            if (gestorDeVariables.llavesencontradas != 2)
+            {
+                contadoresMisiones[1].GetComponent<TextMeshProUGUI>().text = "[" + gestorDeVariables.llavesencontradas + "/" + gestorDeVariables.llaves + "]";
+            }
+            else
+            {
+                AgregarEventoALaCola(BorrarTexto(contadoresMisiones[1].GetComponent<TextMeshProUGUI>(), textoMision[1], 0.05f, 0));
+            }
         }
-        else
-        {
-            AgregarEventoALaCola(GestorDialogos(4));
-            AgregarEventoALaCola(BorrarTexto(contadoresMisiones[0].GetComponent<TextMeshProUGUI>(), textoMision[0], 0.05f, 0));
-        }
-
-        if (gestorDeVariables.llavesencontradas != 2)
-        {
-            contadoresMisiones[1].GetComponent<TextMeshProUGUI>().text = "[" + gestorDeVariables.llavesencontradas + "/"+gestorDeVariables.llaves+"]";
-        }
-        else
-        {
-            AgregarEventoALaCola(BorrarTexto(contadoresMisiones[1].GetComponent<TextMeshProUGUI>(), textoMision[1], 0.05f, 0));
-        }
-    }
+    
 
     public void EventoMision1()
     {

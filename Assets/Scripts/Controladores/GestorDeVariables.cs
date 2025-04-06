@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GestorDeVariables : MonoBehaviour
 {
@@ -15,6 +16,14 @@ public class GestorDeVariables : MonoBehaviour
     public bool llave2;
     public int llaves= 0;
     public int llavesencontradas=0;
+    public Cambiarnivel cambiarnivel;
+
+    public bool frutascompletas=false;
+    public bool copascompletas = false;
+    public bool crucifijoscompletos = false;
+    public bool hiloscompletos = false;
+    public bool velascompletas = false;
+
 
     private void Update()
     {
@@ -29,8 +38,17 @@ public class GestorDeVariables : MonoBehaviour
             PrimeraTiendaEncontrada();
         }
 
-      
+        WinCondition();
 
+
+    }
+    public void WinCondition()
+    {
+        if (frutascompletas && copascompletas && crucifijoscompletos && hiloscompletos && velascompletas)
+        {
+            cambiarnivel.CambiarEscena("victoria");
+
+        }
     }
 
     public void NoTengoLlave()
@@ -57,6 +75,7 @@ public class GestorDeVariables : MonoBehaviour
 
     private void Start()
     {
+        cambiarnivel = FindObjectOfType<Cambiarnivel>();
         controllerUi = FindObjectOfType<ControllerUi>();
         yaempezo = false;
 
@@ -113,4 +132,20 @@ public class GestorDeVariables : MonoBehaviour
 
     }
 
+    public void EncontrarLlave(int index)
+    {
+        switch (index)
+        {
+            case 1:
+                llave1 = true;
+                llavesencontradas++;
+                break;
+
+            case 2:
+                llave2 = true;
+                llavesencontradas++;
+                break;
+        }
+
+    }
 }
