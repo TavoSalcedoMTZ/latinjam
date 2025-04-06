@@ -4,48 +4,45 @@ public class Interactor : MonoBehaviour
 {
     public ControllerUi controllerUi;
 
-    public void Interaction()
-    {
-
-
-   
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit _hit;
-
-
-            if (Physics.Raycast(ray, out _hit, 3))
-            {
-
-                InteractableObject interactable = _hit.transform.GetComponent<InteractableObject>();
-                if (interactable != null)
-                {
-                    controllerUi.objetoInRaycast = true;
-
-                if (Input.GetKeyDown(KeyCode.E)){
-
-                     interactable.Interact();
-                    }
-
-                }
-                 
-                else
-                {
-                    controllerUi.objetoInRaycast = false;   
-            }
-            }   
-             else
-            { return; }
-
-    }
-        
-    
-
+    private InteractableObject objetoDetectado;
 
     void Update()
     {
-        Interaction();
+        DetectarObjeto();
+        ProcesarInput();
     }
-}   
 
+    void DetectarObjeto()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit _hit;
 
+        if (Physics.Raycast(ray, out _hit, 3))
+        {
+            objetoDetectado = _hit.transform.GetComponent<InteractableObject>();
+
+            if (objetoDetectado != null)
+            {
+                controllerUi.objetoInRaycast = true;
+            }
+            else
+            {
+                controllerUi.objetoInRaycast = false;
+                objetoDetectado = null;
+            }
+        }
+        else
+        {
+            controllerUi.objetoInRaycast = false;
+            objetoDetectado = null;
+        }
+    }
+
+    void ProcesarInput()
+    {
+        if (objetoDetectado != null && Input.GetKeyDown(KeyCode.E))
+        {
+            objetoDetectado.Interact();
+        }
+    }
+}

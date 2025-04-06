@@ -1,14 +1,76 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Puerta : MonoBehaviour
 {
-    public Animator puerta;
+    public Animator puerta1;
+    public Animator puerta2;
+    private GestorDeVariables gestorDeVariables;
+    public bool intentoOpen1 = false;
+    public bool intentoOpen2 = false;
+    public bool yaMostroMensajeSinLlave = false;
 
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        puerta.Play("abrir");
-        puerta.Play("abrir2");
+        gestorDeVariables = FindObjectOfType<GestorDeVariables>();
+    }
+
+    public void AbrirPuerta1()
+    {
+        if (gestorDeVariables.llave1)
+        {
+            puerta1.SetBool("isOpen", true);
+        }
+        else
+        {
+            if (!intentoOpen1)
+            {
+                intentoOpen1 = true;
+                if (!yaMostroMensajeSinLlave)
+                {
+                    yaMostroMensajeSinLlave = true;
+                    Debug.Log("No tengo llave puerta2");
+                    gestorDeVariables.NoTengoLlave();
+                }
+                else
+                {
+                    gestorDeVariables.NoTengoLlave2();
+                }
+                gestorDeVariables.llaves++;
+            }
+            else
+            {
+                gestorDeVariables.NoTengoLlave2();
+            }
+        }
+    }
+
+    public void AbrirPuerta2()
+    {
+        if (gestorDeVariables.llave2)
+        {
+            puerta2.SetBool("isOpen", true);
+        }
+        else
+        {
+            if (!intentoOpen2)
+            {
+                intentoOpen2 = true;
+                if (!yaMostroMensajeSinLlave)
+                {
+                    yaMostroMensajeSinLlave = true;
+                    Debug.Log("No tengo llave puerta2");
+                    gestorDeVariables.NoTengoLlave();
+                }
+                else
+                {
+                    gestorDeVariables.NoTengoLlave2();
+                }
+                gestorDeVariables.llaves++;
+            }
+            else
+            {
+                gestorDeVariables.NoTengoLlave2();
+            }
+        }
     }
 }

@@ -229,6 +229,39 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41024562}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &189023775 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4515939924098564545, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
+  m_PrefabInstance: {fileID: 9089726132715619355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &189023776 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8362018210094554059, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
+  m_PrefabInstance: {fileID: 9089726132715619355}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189023775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 832e4237606a1e34aadfb141d111b63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &189023782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189023775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 526d1798e1f739842a4e45c54ede0a47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duracion: 5
+  materialIndex: 1
+  escalaMaxima: 1.014
+  zonaSegura: {fileID: 0}
+  gestorDeVariables: {fileID: 0}
 --- !u!1 &192546601
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +384,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateZonaSegura: 0
   playermodel: {fileID: 41024562}
+  numerodeTiendasEncontradas: 0
+  iniciojuego: 0
+  yaempezo: 0
+  primerazonaSegura: 0
+  llave1: 0
+  llave2: 0
+  llaves: 0
+  llavesencontradas: 0
 --- !u!114 &193439138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1672,6 +1713,10 @@ MonoBehaviour:
   - {fileID: 1426605002}
   - {fileID: 371120311}
   gestorDeVariables: {fileID: 193439137}
+  textoMision: []
+  contadoresMisiones: []
+  mensajeMision: 
+  dialgosTexto: {fileID: 0}
 --- !u!4 &1212064477
 Transform:
   m_ObjectHideFlags: 0
@@ -8666,9 +8711,53 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4076366111152565179, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -8678823145569952518, guid: c71ee3a8719f13c4fa5b060260fca1f6, type: 3}
     - target: {fileID: 4515939924098564545, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
       propertyPath: m_Name
       value: Puesto_Centro_Santeria
+      objectReference: {fileID: 0}
+    - target: {fileID: 8271867225640216749, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8271867225640216749, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8271867225640216749, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 189023782}
+    - target: {fileID: 8271867225640216749, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 189023776}
+    - target: {fileID: 8271867225640216749, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8271867225640216749, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TiendaEncontrada
+      objectReference: {fileID: 0}
+    - target: {fileID: 8271867225640216749, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: EsconderseActivar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8271867225640216749, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: zonaseguraencontrada, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8271867225640216749, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: ZonaSegura, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8271867225640216749, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
+      propertyPath: OnInteract.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8362018210094554059, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
       propertyPath: camaraJugador
@@ -8677,7 +8766,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4515939924098564545, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 189023782}
   m_SourcePrefab: {fileID: 100100000, guid: c17434a70f51a3c4b9622aa8787aaa10, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

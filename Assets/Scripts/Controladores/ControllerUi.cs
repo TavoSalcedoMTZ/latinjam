@@ -85,17 +85,23 @@ public class ControllerUi : MonoBehaviour
 
     void ManejoContadoresObjetos()
     {
-        if (gestorDeVariables.numerodeTiendasEncontradas < 5)
+        if (gestorDeVariables.numerodeTiendasEncontradas != 5)
         {
             contadoresMisiones[0].GetComponent<TextMeshProUGUI>().text = "[" + gestorDeVariables.numerodeTiendasEncontradas + "/5]";
         }
         else
         {
-           
+            AgregarEventoALaCola(GestorDialogos(4));
             AgregarEventoALaCola(BorrarTexto(contadoresMisiones[0].GetComponent<TextMeshProUGUI>(), textoMision[0], 0.05f, 0));
+        }
 
-       
-
+        if (gestorDeVariables.llavesencontradas != 2)
+        {
+            contadoresMisiones[1].GetComponent<TextMeshProUGUI>().text = "[" + gestorDeVariables.llavesencontradas + "/"+gestorDeVariables.llaves+"]";
+        }
+        else
+        {
+            AgregarEventoALaCola(BorrarTexto(contadoresMisiones[1].GetComponent<TextMeshProUGUI>(), textoMision[1], 0.05f, 0));
         }
     }
 
@@ -111,8 +117,13 @@ public class ControllerUi : MonoBehaviour
         canOpenInventory = true;
         AgregarEventoALaCola(EscribirTexto(mensajeMision, 0.05f, textoMision[0], 9090));
     }
+    public void EventoMision2()
+    {
+        mensajeMision = "Encuentra la llave de la puerta";
+        AgregarEventoALaCola(EscribirTexto(mensajeMision, 0.05f, textoMision[1], 1));
+    }
 
-  public  IEnumerator GestorDialogos(int dialogoIndex)
+    public  IEnumerator GestorDialogos(int dialogoIndex)
     {
         switch (dialogoIndex)
         {
@@ -168,6 +179,19 @@ public class ControllerUi : MonoBehaviour
                 AgregarEventoALaCola(EscribirTexto("Me parece que es la ultima", 0.05f, dialgosTexto, 9090));
                 AgregarEventoALaCola(BorrarTexto(dialgosTexto, null, 0.01f, 1f));
                 break;
+
+            //cuando encuentras la puerta pero no tienes la llave
+            case 5:
+                AgregarEventoALaCola(EscribirTexto("La puerta esta cerrada", 0.05f, dialgosTexto, 9090));
+                AgregarEventoALaCola(BorrarTexto(dialgosTexto, null, 0.01f, 1f));
+                AgregarEventoALaCola(EscribirTexto("Debo encontrar la llave seguro estara por aqui", 0.05f, dialgosTexto, 9090));
+                AgregarEventoALaCola(BorrarTexto(dialgosTexto, null, 0.01f, 1f));
+                EventoMision2();
+                break;
+            case 6:
+                AgregarEventoALaCola(EscribirTexto("Sigue Cerrado", 0.05f, dialgosTexto, 9090));
+                AgregarEventoALaCola(BorrarTexto(dialgosTexto, null, 0.01f, 1f));
+                break;
         }
     }
 
@@ -184,7 +208,7 @@ public class ControllerUi : MonoBehaviour
 
         if (index != 9090)
         {
-            contadoresMisiones[0].SetActive(true);
+            contadoresMisiones[index].SetActive(true);
         }
     }
 

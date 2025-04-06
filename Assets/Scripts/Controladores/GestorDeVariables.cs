@@ -11,7 +11,10 @@ public class GestorDeVariables : MonoBehaviour
     public bool yaempezo;
     public bool primerazonaSegura=false;
     private ControllerUi controllerUi;
-
+    public bool llave1;
+    public bool llave2;
+    public int llaves= 0;
+    public int llavesencontradas=0;
 
     private void Update()
     {
@@ -28,6 +31,15 @@ public class GestorDeVariables : MonoBehaviour
 
       
 
+    }
+
+    public void NoTengoLlave()
+    {
+        controllerUi.AgregarEventoALaCola(controllerUi.GestorDialogos(5));
+    }
+    public void NoTengoLlave2()
+    {
+        controllerUi.AgregarEventoALaCola(controllerUi.GestorDialogos(6));
     }
     private void yaempezojuego()
     {
@@ -80,11 +92,14 @@ public class GestorDeVariables : MonoBehaviour
     }
     public void TiendaEncontrada()
     {
-        if(numerodeTiendasEncontradas<5 && numerodeTiendasEncontradas>1)
+        if (numerodeTiendasEncontradas < 5 && numerodeTiendasEncontradas > 1)
         {
-          controllerUi.AgregarEventoALaCola(controllerUi.GestorDialogos(3));
+            controllerUi.AgregarEventoALaCola(controllerUi.GestorDialogos(3));
         }
-        else
+        else if (numerodeTiendasEncontradas == 5)
+        {
+            controllerUi.AgregarEventoALaCola(controllerUi.GestorDialogos(4));
+        }
         {
            
         }
@@ -93,6 +108,7 @@ public class GestorDeVariables : MonoBehaviour
     public void IniciaJuego()
     {
         iniciojuego = false;
+       
 
 
     }

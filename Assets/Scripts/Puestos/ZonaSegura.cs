@@ -25,6 +25,8 @@ public class ZonaSegura : MonoBehaviour
     {
         posicionOriginal = camaraJugador.position;
         rotacionOriginal = camaraJugador.rotation;
+        Debug.Log("Marcador");
+        Debug.Log(posicionOriginal);
     }
 
     public void EsconderseActivar()
@@ -43,8 +45,7 @@ public class ZonaSegura : MonoBehaviour
 
     private void Update()
     {
-        if (TiendaEncontrada)
-        {
+   
             if (moverCamara && camaraJugador != null)
             {
                 camaraJugador.position = Vector3.Lerp(camaraJugador.position, posicionEscondite.position, Time.deltaTime * velocidadMovimiento);
@@ -62,8 +63,7 @@ public class ZonaSegura : MonoBehaviour
                 StartCoroutine(SalirEscondite());
             }
 
-        }
-        else {  }
+    
     }
 
     private System.Collections.IEnumerator SalirEscondite()
