@@ -12,7 +12,7 @@ public class ControllerUi : MonoBehaviour
     public GestorDeVariables gestorDeVariables;
     int contador = 0;
     int contadorFruta = 0;
-    int contadorcrucifijos=0;
+    int contadorcrucifijos = 0;
     int contadorhilo = 0;
     int contadorvela = 0;
     public TextMeshProUGUI[] textoMision;
@@ -92,36 +92,37 @@ public class ControllerUi : MonoBehaviour
             {
                 gestorDeVariables.frutascompletas = true;
             }
-            else if (tag == "Crucifico")
+        }
+        else if (tag == "Crucifico")
+        {
+            contadorcrucifijos += 1;
+            textosObjetos[2].text = "Crucifico: " + contadorcrucifijos + "/3";
+            if (contadorcrucifijos == 3)
             {
-                contadorcrucifijos += 1;
-                textosObjetos[2].text = "Crucifico" + contadorcrucifijos + "/3";
-                if (contadorcrucifijos == 3)
-                {
-                    gestorDeVariables.crucifijoscompletos = true;
-                }
-            }
-            else if (tag == "hilo")
-            {
-                contadorhilo += 1;
-                textosObjetos[3].text = "hilo" + contadorhilo + "/3";
-
-                if (contadorhilo == 3)
-                {
-                    gestorDeVariables.hiloscompletos = true;
-                }
-            }
-            else if (tag == "vela")
-            {
-                contadorvela += 1;
-                textosObjetos[4].text = "vela" + contadorvela + "/3";
-
-                if (contadorvela == 3)
-                {
-                    gestorDeVariables.velascompletas = true;
-                }
+                gestorDeVariables.crucifijoscompletos = true;
             }
         }
+        else if (tag == "hilo")
+        {
+            contadorhilo += 1;
+            textosObjetos[3].text = "hilo: " + contadorhilo + "/3";
+
+            if (contadorhilo == 3)
+            {
+                gestorDeVariables.hiloscompletos = true;
+            }
+        }
+        else if (tag == "vela")
+        {
+            contadorvela += 1;
+            textosObjetos[4].text = "vela: " + contadorvela + "/4";
+
+            if (contadorvela == 4)
+            {
+                gestorDeVariables.velascompletas = true;
+            }
+        }
+        
     }
         void ManejoContadoresObjetos()
         {
