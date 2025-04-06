@@ -8,6 +8,7 @@ public class ZonaSegura : MonoBehaviour
 
     private bool moverCamara = false;
     private bool escondido = false;
+    public bool TiendaEncontrada = false; // Variable para verificar si la tienda ha sido encontrada
 
     private Vector3 posicionOriginal;
     private Quaternion rotacionOriginal;
@@ -28,30 +29,41 @@ public class ZonaSegura : MonoBehaviour
 
     public void EsconderseActivar()
     {
-        GuardarPosicionOriginal(); 
-        gestorDeVariables.ActivarEsconderse();
-        moverCamara = true;
-        escondido = true;
+        if (TiendaEncontrada)
+        {
+            GuardarPosicionOriginal();
+            gestorDeVariables.ActivarEsconderse();
+            moverCamara = true;
+            escondido = true;
+        }
+        else { return; }
     }
+
+       
 
     private void Update()
     {
-        if (moverCamara && camaraJugador != null)
+        if (TiendaEncontrada)
         {
-            camaraJugador.position = Vector3.Lerp(camaraJugador.position, posicionEscondite.position, Time.deltaTime * velocidadMovimiento);
-            camaraJugador.rotation = Quaternion.Lerp(camaraJugador.rotation, posicionEscondite.rotation, Time.deltaTime * velocidadMovimiento);
-
-            if (Vector3.Distance(camaraJugador.position, posicionEscondite.position) < 0.05f)
+            if (moverCamara && camaraJugador != null)
             {
-                moverCamara = false;
-            }
-        }
+                camaraJugador.position = Vector3.Lerp(camaraJugador.position, posicionEscondite.position, Time.deltaTime * velocidadMovimiento);
+                camaraJugador.rotation = Quaternion.Lerp(camaraJugador.rotation, posicionEscondite.rotation, Time.deltaTime * velocidadMovimiento);
 
-        if (Input.GetKeyDown(KeyCode.E) && escondido)
-        {
-         
-            StartCoroutine(SalirEscondite());
+                if (Vector3.Distance(camaraJugador.position, posicionEscondite.position) < 0.05f)
+                {
+                    moverCamara = false;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.E) && escondido)
+            {
+
+                StartCoroutine(SalirEscondite());
+            }
+
         }
+        else {  }
     }
 
     private System.Collections.IEnumerator SalirEscondite()

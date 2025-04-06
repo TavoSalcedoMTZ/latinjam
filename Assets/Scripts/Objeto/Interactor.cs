@@ -35,11 +35,11 @@ public class Interactor : MonoBehaviour
             }
             }   
              else
-            {
-            
-            }
-        
+            { return; }
+
     }
+        
+    
 
 
     void Update()
