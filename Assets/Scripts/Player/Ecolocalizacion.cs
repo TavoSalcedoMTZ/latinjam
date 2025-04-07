@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ecolocalizacion : MonoBehaviour
 {
@@ -6,16 +7,31 @@ public class Ecolocalizacion : MonoBehaviour
     public int cantidadRayosActivo = 30;
     public int cantidadRayosPasivo = 18;
     public float intervaloEcolocalizacion = 0.5f;
+    public float tiempoRecarga = 15f;
+
     private float tiempoUltimaEcolocalizacion = 0f;
+    private float tiempoUltimaActiva = -Mathf.Infinity;
+
+    public Image fillerRecarga; // UI Image con tipo Fill
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        // Manejamos la recarga del filler visual
+        if (fillerRecarga != null)
+        {
+            float progreso = Mathf.Clamp01((Time.time - tiempoUltimaActiva) / tiempoRecarga);
+            fillerRecarga.fillAmount = progreso;
+        }
+
+        // Activación manual con Q
+        if (Input.GetKeyDown(KeyCode.Q) && Time.time >= tiempoUltimaActiva + tiempoRecarga)
         {
             Debug.Log("Ecolocalización activa");
             EmitirRayos(cantidadRayosActivo, rangoDeteccion);
+            tiempoUltimaActiva = Time.time;
         }
 
+        // Ecolocalización pasiva mientras se mueve
         if ((Input.GetButton("Horizontal") || Input.GetButton("Vertical")) &&
             Time.time >= tiempoUltimaEcolocalizacion + intervaloEcolocalizacion)
         {

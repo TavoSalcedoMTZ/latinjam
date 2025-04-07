@@ -90,6 +90,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         if (patrolPoints.Length == 0) return;
 
+        agent.ResetPath();
         agent.destination = patrolPoints[currentPatrolIndex].position;
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
     }
