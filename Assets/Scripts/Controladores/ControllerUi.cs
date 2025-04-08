@@ -120,8 +120,8 @@ public class ControllerUi : MonoBehaviour
         else if (tag == "Crucifico")
         {
             contadorcrucifijos += 1;
-            textosObjetos[2].text =contadorcrucifijos + "/3";
-            if (contadorcrucifijos == 3)
+            textosObjetos[2].text =contadorcrucifijos + "/4";
+            if (contadorcrucifijos == 4)
             {
                 gestorDeVariables.crucifijoscompletos = true;
             }
