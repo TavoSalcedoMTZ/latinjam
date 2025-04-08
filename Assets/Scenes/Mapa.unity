@@ -14928,8 +14928,8 @@ MonoBehaviour:
   patrolPoints:
   - {fileID: 1776512921}
   - {fileID: 1951176490}
-  - {fileID: 633234482}
   - {fileID: 947429419}
+  - {fileID: 633234482}
   detectionRadius: 5
   playerLayer:
     serializedVersion: 2
@@ -29275,11 +29275,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -128453064815258053, guid: fe9deea010fd3ed4ea4f329335fd3459, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.21
+      value: -7.06
       objectReference: {fileID: 0}
     - target: {fileID: -128453064815258053, guid: fe9deea010fd3ed4ea4f329335fd3459, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.293
+      value: 6.56
       objectReference: {fileID: 0}
     - target: {fileID: -128453064815258053, guid: fe9deea010fd3ed4ea4f329335fd3459, type: 3}
       propertyPath: m_LocalRotation.w
@@ -37110,7 +37110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2833816445151179895, guid: 551e8714c498b6247a59a661ca78f191, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.508
+      value: 0.729
       objectReference: {fileID: 0}
     - target: {fileID: 3886242272500136829, guid: 551e8714c498b6247a59a661ca78f191, type: 3}
       propertyPath: m_TagString
@@ -49838,7 +49838,7 @@ MonoBehaviour:
     m_NormalColor: {r: 0.18867922, g: 0.18778922, b: 0.18778922, a: 1}
     m_HighlightedColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
     m_PressedColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.1882353, g: 0.1882353, b: 0.1882353, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -56094,11 +56094,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c1514bc6948301042abe634edb26fe4c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.362
+      value: 5.79
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c1514bc6948301042abe634edb26fe4c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 22.404
+      value: 22.018
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c1514bc6948301042abe634edb26fe4c, type: 3}
       propertyPath: m_LocalRotation.w
