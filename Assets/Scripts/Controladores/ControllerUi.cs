@@ -43,6 +43,7 @@ public class ControllerUi : MonoBehaviour
         if (!GestorDeVariables.PrimeraVezYaPasada)
         {
             AgregarEventoALaCola(GestorDialogos(0));
+            canOpenInventory=true;
         }
         else
         {
