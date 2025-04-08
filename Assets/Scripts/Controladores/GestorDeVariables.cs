@@ -53,6 +53,7 @@ public class GestorDeVariables : MonoBehaviour
         yaempezo = false;
         iniciojuego = true;
         numerodeTiendasEncontradas = 0;
+        eventopasado = false;
     }
 
     private void Update()
@@ -64,7 +65,7 @@ public class GestorDeVariables : MonoBehaviour
 
         if (ObjetosCompletos && !eventopasado)
         {
-            controllerUi.AgregarEventoALaCola(controllerUi.GestorDialogos(11));
+            StartCoroutine(controllerUi.GestorDialogos(11));
             eventopasado = true;
         }
     }
