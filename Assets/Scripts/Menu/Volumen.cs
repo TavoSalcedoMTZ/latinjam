@@ -7,7 +7,7 @@ public class Volumen : MonoBehaviour
 {
     public Slider slider;
     public float sliderValue;
-    public Image imagenMute;
+   // public Image imagenMute;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,11 +28,11 @@ public class Volumen : MonoBehaviour
     {
         if (sliderValue == 0)
         {
-            imagenMute.enabled = true;
+           // imagenMute.enabled = true;
         }
         else
         {
-            imagenMute.enabled = false;
+            //imagenMute.enabled = false;
         }
     }
 }
