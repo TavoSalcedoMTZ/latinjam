@@ -274,9 +274,7 @@ public class ControllerUi : MonoBehaviour
                 break;
 
             case 9:
-                AgregarEventoALaCola(EscribirTexto("Encontre un ingrediente", 0.05f, dialgosTexto, 9090, false));
-                AgregarEventoALaCola(BorrarTexto(dialgosTexto, null, 0.01f, 1f));
-                break;
+
 
             case 11:
                 AgregarEventoALaCola(EscribirTexto("Ya tengo todo, ahora tengo que ir al altar", 0.05f, dialgosTexto, 9090, false));
@@ -396,4 +394,20 @@ public class ControllerUi : MonoBehaviour
 
         procesandoCola = false;
     }
+
+    public void EjecutarDialogoConPrioridad(int id)
+    {
+        Debug.Log("Ejecutando diálogo con prioridad. ID: " + id);
+
+
+        colaDeEventos.Clear();
+
+
+        StopAllCoroutines();
+        procesandoCola = false;
+
+  
+        StartCoroutine(GestorDialogos(id));
+    }
+
 }

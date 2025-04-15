@@ -13,7 +13,7 @@ public class Cambiarnivel : MonoBehaviour
     public void CambiarEscena(string nombre)
     {
 
-        SceneManager.LoadScene(nombre);
+        SceneManager.LoadSceneAsync(nombre);
     }
 
     public void ActivarMuerte()
@@ -31,7 +31,7 @@ public class Cambiarnivel : MonoBehaviour
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(FadeIn(panelMuerte));
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene("Perder");
+        SceneManager.LoadSceneAsync("Perder");
     }
 
     IEnumerator Ganar()
@@ -40,7 +40,7 @@ public class Cambiarnivel : MonoBehaviour
         yield return StartCoroutine(FadeIn(panelGanar));
         yield return new WaitForSeconds(2);
 
-        SceneManager.LoadScene("victoria");
+        SceneManager.LoadSceneAsync("victoria");
     }
 
     IEnumerator FadeIn(Image image)
