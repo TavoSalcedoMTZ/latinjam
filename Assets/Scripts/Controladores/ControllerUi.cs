@@ -40,16 +40,21 @@ public class ControllerUi : MonoBehaviour
         objetoInRaycast = false;
         Panel.SetActive(false);
 
-        if (!GestorDeVariables.PrimeraVezYaPasada)
-        {
-            AgregarEventoALaCola(GestorDialogos(0));
-            canOpenInventory=true;
+
+
+            if (!GestorDeVariables.PrimeraVezYaPasada)
+            {
+                AgregarEventoALaCola(GestorDialogos(0));
+            
+            }
+            else
+            {
+                inventarioabiertoporprimeraVez = true;
+                AgregarEventoALaCola(GestorDialogos(15));
+                  canOpenInventory = true;
         }
-        else
-        {
-            inventarioabiertoporprimeraVez = true;
-           AgregarEventoALaCola( GestorDialogos(15));  
-        }
+
+        
     }
 
     void Update()

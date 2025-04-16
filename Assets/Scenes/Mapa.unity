@@ -30693,6 +30693,7 @@ MonoBehaviour:
   velascompletas: 0
   altaractivo: 0
   ObjetosCompletos: 0
+  primeravezejecutado: 1
   llave1: 0
   llave2: 0
   llaves: 0
@@ -48446,8 +48447,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba45d41282719d44c8069770af164440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
-  sliderValue: 0
+  sliderMouse: {fileID: 1845380247}
+  sliderValueMouse: 0
 --- !u!1 &1820070808 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 58f68cc6471fe5146b3d9144063b4c52, type: 3}

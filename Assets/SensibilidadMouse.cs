@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class SensibilidadMouse : MonoBehaviour
 {
-    public Slider slider;
-    public float sliderValue;
+    public Slider sliderMouse;
+    public float sliderValueMouse;
     private RotationCamara rotationCamara;
 
     void Start()
@@ -14,31 +14,31 @@ public class SensibilidadMouse : MonoBehaviour
 
         if (PlayerPrefs.HasKey("MouseSensitivity"))
         {
-            sliderValue = PlayerPrefs.GetFloat("MouseSensitivity");
+            sliderValueMouse = PlayerPrefs.GetFloat("MouseSensitivity");
         }
         else
         {
-            sliderValue = 200f; 
+            sliderValueMouse = 200f; 
         }
 
-        slider.value = sliderValue;
-        AplicarSensibilidad(sliderValue);
+        sliderMouse.value = sliderValueMouse;
+        AplicarSensibilidad(sliderValueMouse);
 
 
-        slider.minValue = 50f;  
-        slider.maxValue = 500f; 
+        sliderMouse.minValue = 50f;  
+        sliderMouse.maxValue = 500f; 
 
 
-        slider.onValueChanged.AddListener(delegate { OnSliderValueChanged(); });
+        sliderMouse.onValueChanged.AddListener(delegate { OnSliderValueChanged(); });
     }
 
     void OnSliderValueChanged()
     {
-        sliderValue = slider.value;
-        AplicarSensibilidad(sliderValue);
+        sliderValueMouse = sliderMouse.value;
+        AplicarSensibilidad(sliderValueMouse);
 
 
-        PlayerPrefs.SetFloat("MouseSensitivity", sliderValue);
+        PlayerPrefs.SetFloat("MouseSensitivity", sliderValueMouse);
         PlayerPrefs.Save();
     }
 

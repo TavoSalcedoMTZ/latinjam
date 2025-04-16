@@ -27,8 +27,9 @@
             public bool altaractivo = false;
             public bool ObjetosCompletos = false;
             private bool yapasowin = false;
+            public bool primeravezejecutado = true;
 
-            [Header("Llaves")]
+    [Header("Llaves")]
             public bool llave1;
             public bool llave2;
             public int llaves = 0;
@@ -100,7 +101,9 @@
                     stateZonaSegura = false;
                     yaempezo = true;
                     PrimeraVezYaPasada = true;
-                }
+                    primeravezejecutado=false;
+
+        }
             }
 
             private void VerificarPrimeraZona()
